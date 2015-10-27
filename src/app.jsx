@@ -48,19 +48,20 @@ var App = React.createClass({
 	deleteButton: function(){
 		if(!this.state.loaded){
 			return
+		} else {
+			return (
+				<div className="text-center clear-complete">
+					<hr />
+					<button 
+						type="button"
+						onClick={this.onDeleteDoneClick}
+						className="btn btn-default"
+						>
+						Clear Complete
+					</button>
+				</div>
+			);
 		}
-		return (
-			<div className="text-center clear-complete">
-				<hr />
-				<button 
-					type="button"
-					onClick={this.onDeleteDoneClick}
-					className="btn btn-default"
-					>
-					Clear Complete
-				</button>
-			</div>
-		);
 	},
 	onDeleteDoneClick: function(){
 		for(var key in this.state.items){
