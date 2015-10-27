@@ -1,12 +1,12 @@
 var React = require('react');
+var ListItem = require('./list-item');
 
 var List = React.createClass({
 	render: function(){
-		console.log(this.props.items);
 		return(
-			<ul>
+			<div>
 				{ this.renderList() }
-			</ul>
+			</div>
 			);
 	},
 	renderList: function(){
@@ -20,10 +20,15 @@ var List = React.createClass({
 		var children = [];
 
 		for(var key in this.props.items){
+			var item = this.props.items[key];
+			item.key = key;
+
 			children.push(
-				<li>
-					{this.props.items[key].text}
-				</li>
+				<ListItem
+					item={this.props.items[key]}
+					key={key}
+					>
+				</ListItem>
 				);
 		}
 		return children; 

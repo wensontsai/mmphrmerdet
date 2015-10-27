@@ -22,7 +22,6 @@ var Header = React.createClass({
 						Add
 					</button>
 				</span>
-				{this.state.text}
 			</div>
 			);
 	},

@@ -1,10 +1,12 @@
 var React = require('react');
 var ReactFire = require('reactfire');
+// FIREBASE
 var Firebase = require('firebase');
+var rootUrl = 'https://intense-inferno-4617.firebaseio.com/';
+// Components
 var Header = require('./header');
 var List = require('./list');
 
-var rootUrl = 'https://intense-inferno-4617.firebaseio.com/';
 
 
 var App = React.createClass({
@@ -30,6 +32,7 @@ var App = React.createClass({
 						To-Do List
 					</h2>
 					<Header itemsStore={this.firebaseRefs.items}/>
+					<hr/>
 					<div className={"content " + (this.state.loaded ? 'loaded' : '') }>
 						<List items={this.state.items} />
 					</div>
