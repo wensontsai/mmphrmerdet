@@ -35,7 +35,7 @@ var App = React.createClass({
 					<hr/>
 					<div className={"content " + (this.state.loaded ? 'loaded' : '') }>
 						<List items={this.state.items} />
-					{ this.deleteButton() }
+						{ this.deleteButton() }
 					</div>
 				</div>
 			</div>
