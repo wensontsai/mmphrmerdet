@@ -25,6 +25,7 @@ var ListItem = React.createClass({
 				</span>
 				<input type="text"
 					onChange={this.handleTextChange}
+					disabled={this.state.done }
 					className="form-control"
 					value={this.state.text} />
 				<span className="input-group-btn">
@@ -44,7 +45,12 @@ var ListItem = React.createClass({
 			return null
 		} else {
 			return [
-				<button className="btn btn-default">Save</button>,
+				<button 
+					onClick={this.handleSaveClick}
+					className="btn btn-default"
+					>
+					Save
+				</button>,
 				<button 
 					onClick={this.handleUndoClick}
 					className="btn btn-default"
@@ -74,8 +80,10 @@ var ListItem = React.createClass({
 			textChanged: false
 		});
 	},
-	handlSaveClick: function(){
-
+	handleSaveClick: function(){
+		this.fb.update({ text: this.state.text });
+		console.log(this.state.text);
+		this.setState({ textChanged: false });
 	}
 });
 

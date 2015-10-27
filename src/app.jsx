@@ -35,6 +35,7 @@ var App = React.createClass({
 					<hr/>
 					<div className={"content " + (this.state.loaded ? 'loaded' : '') }>
 						<List items={this.state.items} />
+					{ this.deleteButton() }
 					</div>
 				</div>
 			</div>
@@ -43,6 +44,30 @@ var App = React.createClass({
 	handleDataLoaded: function(){
 		// once firebase gets data, this func will run
 		this.setState( { loaded: true } );
+	},
+	deleteButton: function(){
+		if(!this.state.loaded){
+			return
+		}
+		return (
+			<div className="text-center clear-complete">
+				<hr />
+				<button 
+					type="button"
+					onClick={this.onDeleteDoneClick}
+					className="btn btn-default"
+					>
+					Clear Complete
+				</button>
+			</div>
+		);
+	},
+	onDeleteDoneClick: function(){
+		for(var key in this.state.items){
+			if(this.state.items[key].done){
+				fb.child(key).remove();
+			}
+		}
 	}
 });
 
