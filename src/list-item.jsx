@@ -7,7 +7,8 @@ var ListItem = React.createClass({
 	getInitialState: function(){
 		return {
 			text: this.props.item.text,
-			done: this.props.item.done
+			done: this.props.item.done,
+			textChanged: false
 		}
 	},	 
 	componentWillMount: function(){
@@ -23,21 +24,58 @@ var ListItem = React.createClass({
 						type="checkbox" />
 				</span>
 				<input type="text"
+					onChange={this.handleTextChange}
 					className="form-control"
-					value={this.state.text}
-					/>
+					value={this.state.text} />
 				<span className="input-group-btn">
-					<button className="btn btn-default">
+					{ this.changesButtons() }
+					<button
+						onClick={this.handleDeleteClick} 
+						className="btn btn-default"
+						>
 						Delete
 					</button>
 				</span>
 			</div>
 		);
 	},
+	changesButtons: function(){
+		if(!this.state.textChanged){
+			return null
+		} else {
+			return [
+				<button className="btn btn-default">Save</button>,
+				<button 
+					onClick={this.handleUndoClick}
+					className="btn btn-default"
+					>
+					Undo
+				</button>
+			]
+		}
+	},
 	handleDoneChange: function(event){
 		var update = {done: event.target.checked};
 		this.setState(update);
 		this.fb.update(update);
+	},
+	handleDeleteClick: function(event){
+		this.fb.remove();
+	},
+	handleTextChange: function(){
+		this.setState({ 
+			text: event.target.value,
+			textChanged: true
+		});
+	},
+	handleUndoClick: function(){
+		this.setState({
+			text: this.props.item.text,
+			textChanged: false
+		});
+	},
+	handlSaveClick: function(){
+
 	}
 });
 
